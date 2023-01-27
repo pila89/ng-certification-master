@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { WeatherService } from "../../http/weather.service";
 
 @Component({
@@ -14,25 +14,23 @@ export class AddLocationComponent implements OnInit {
   constructor(private WeatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.listzipcodeEntred = localStorage.getItem("salim");
+    const data = localStorage.getItem("zipCodes");
+    if (data !== null) {
+      this.listzipcodeEntred = data?.split(",");
+    }
     this.form = new FormGroup({
-      zipCode: new FormControl(),
+      zipCode: new FormControl("", Validators.required),
     });
   }
   onClick() {
     this.WeatherService.getWeather(this.form.value.zipCode).subscribe(
       (data) => {
         this.data = data;
-        console.log(data);
+        this.form.reset();
       }
     );
-    if (localStorage.getItem("salim") == null) {
-      this.listzipcodeEntred.push(this.form.value.zipCode),
-        localStorage.setItem("salim", this.listzipcodeEntred);
-    } else {
-      this.listzipcodeEntred = localStorage.getItem("salim")?.split(",");
-      this.listzipcodeEntred.push(this.form.value.zipCode),
-        localStorage.setItem("salim", this.listzipcodeEntred);
-    }
+    this.listzipcodeEntred.push(this.form.value.zipCode);
+    localStorage.setItem("zipCodes", this.listzipcodeEntred);
+    // sessionStorage
   }
 }

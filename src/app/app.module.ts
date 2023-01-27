@@ -7,10 +7,16 @@ import { AddLocationComponent } from "./components/add-location/add-location.com
 import { CurrentWeatherComponent } from "./components/current-weather/current-weather.component";
 import { ForecastComponent } from "./components/forecast/forecast.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from "./components/not-found/not-found.component";
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule,AppRoutingModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+  ],
   declarations: [
     AppComponent,
     AddLocationComponent,
