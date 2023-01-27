@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { ForcastComponent } from './forcast-component/forcast.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { AddLocationComponent } from "./components/add-location/add-location.component";
+import { ForecastComponent } from "./components/forecast/forecast.component";
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
-  { path: 'forcast', component: ForcastComponent },
+  { path: "", component: AddLocationComponent },
+  { path: "forecast/:zipCode", component: ForecastComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
