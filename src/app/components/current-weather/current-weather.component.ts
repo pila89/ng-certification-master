@@ -6,6 +6,7 @@ import {
   // SimpleChanges,
 } from "@angular/core";
 import { WeatherService } from "../../http/weather.service";
+import { Weather } from "../../models/weather";
 
 @Component({
   selector: "app-current-weather",
@@ -14,7 +15,7 @@ import { WeatherService } from "../../http/weather.service";
 })
 export class CurrentWeatherComponent implements OnInit {
   //, OnChanges
-  public data: any;
+  public data: Weather;
   @Input() currentZipCode?: string;
 
   constructor(private weatherService: WeatherService) {}
@@ -27,7 +28,7 @@ export class CurrentWeatherComponent implements OnInit {
   // }
 
   getCurrentWeather(zipCode: string) {
-    this.weatherService.getWeather(zipCode).subscribe((data) => {
+    this.weatherService.getWeather(zipCode).subscribe((data: Weather) => {
       this.data = data;
     });
   }
