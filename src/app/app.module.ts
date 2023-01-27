@@ -7,6 +7,7 @@ import { AddLocationComponent } from "./components/add-location/add-location.com
 import { CurrentWeatherComponent } from "./components/current-weather/current-weather.component";
 import { ForecastComponent } from "./components/forecast/forecast.component";
 import { AppRoutingModule } from "./app-routing.module";
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule,AppRoutingModule],
@@ -15,6 +16,7 @@ import { AppRoutingModule } from "./app-routing.module";
     AddLocationComponent,
     CurrentWeatherComponent,
     ForecastComponent,
+    NotFoundComponent,
   ],
   bootstrap: [AppComponent],
 })
