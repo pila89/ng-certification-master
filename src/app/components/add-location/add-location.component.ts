@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { WeatherService } from "../../http/weather.service";
+import { ZipCodeService } from "../../services/zip-code.service";
 
 @Component({
   selector: "app-add-location",
@@ -9,28 +9,22 @@ import { WeatherService } from "../../http/weather.service";
 })
 export class AddLocationComponent implements OnInit {
   public form: FormGroup;
-  public listzipcodeEntred: any = [];
-  public data: any;
-  constructor(private WeatherService: WeatherService) {}
+  public entredZipCodesList: Array<string> = [];
+  constructor(private zipCodeService: ZipCodeService) {}
 
   ngOnInit(): void {
-    const data = localStorage.getItem("zipCodes");
-    if (data !== null) {
-      this.listzipcodeEntred = data?.split(",");
-    }
+    this.createForm();
+    this.entredZipCodesList = this.zipCodeService.getAllZipCodes();
+  }
+
+  createForm() {
     this.form = new FormGroup({
       zipCode: new FormControl("", Validators.required),
     });
   }
+
   onClick() {
-    this.WeatherService.getWeather(this.form.value.zipCode).subscribe(
-      (data) => {
-        this.data = data;
-        this.form.reset();
-      }
-    );
-    this.listzipcodeEntred.push(this.form.value.zipCode);
-    localStorage.setItem("zipCodes", this.listzipcodeEntred);
-    // sessionStorage
+    this.zipCodeService.addZipCode(this.form.value.zipCode);
+    this.form.reset();
   }
 }

@@ -1,45 +1,16 @@
 <div class="row">
-    <div class="offset-2 col-6 bg-danger">
+    <div class="offset-2 col-6">
         <div class="well" [formGroup]="form">
             <h2>Enter a zipcode:</h2>
-            <input formControlName="zipCode" class="form-control" placeholder="Zipcode" type="text" id="addLocation" autocomplete="postal-code">
+            <input formControlName="zipCode" class="form-control" placeholder="Zipcode" type="text" id="addLocation"
+                autocomplete="postal-code">
             <br>
             <button [disabled]="form.invalid" (click)="onClick()" class="btn btn-primary" id="addLocationBtn">
                 Add location
             </button>
         </div>
     </div>
-    <div>
-        <div class="well flex" *ngIf="data">
-            <div>
-                <h3>{{data?.name}}</h3>
-                <h4>Current conditions: {{data?.weather[0].description}}</h4>
-                <h4>Temperatures today: {{data?.main.temp}}</h4>
-                <p>
-                    Current
-                    - Max {{data?.main.temp_max}}
-                    - Min {{data?.main.temp_min}}
-                </p>
-                <p>
-                    <a href="/forecast/95742">Show 5-day forecast for Rancho Cordova</a>
-                </p>
-            </div>
-            <div>
-                <span class="close">×</span>
-                <div *ngIf="data?.weather[0].description === 'clear sky'">
-                    <img src="https://www.angulartraining.com/images/weather/sun.png">
-                </div>
-                <div *ngIf="data?.weather[0].description === 'overcast clouds'">
-                    <img src="https://www.angulartraining.com/images/weather/clouds.png">
-                </div>
-                <div *ngIf="data?.weather[0].description === 'snow'">
-                    <img src="https://www.angulartraining.com/images/weather/snow.png">
-                </div>
-                <div *ngIf="data?.weather[0].description === 'rain'">
-                    <img src="https://www.angulartraining.com/images/weather/rain.png">
-                </div>
-            </div>
-
-        </div>
+    <div class="offset-2 col-6" >
+        <app-current-weather *ngFor="let zipCode of entredZipCodesList" [currentZipCode]="zipCode"></app-current-weather>
     </div>
 </div>
