@@ -1,15 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  // OnChanges,
+  // SimpleChanges,
+} from "@angular/core";
+import { WeatherService } from "../../http/weather.service";
 
 @Component({
-  selector: 'app-current-weather',
-  templateUrl: './current-weather.component.html',
-  styleUrls: ['./current-weather.component.css']
+  selector: "app-current-weather",
+  templateUrl: "./current-weather.component.html",
+  styleUrls: ["./current-weather.component.css"],
 })
 export class CurrentWeatherComponent implements OnInit {
+  //, OnChanges
+  public data: any;
+  @Input() currentZipCode?: string;
 
-  constructor() { }
+  constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
+    this.getCurrentWeather(this.currentZipCode);
   }
+  // ngOnChanges(changes: SimpleChanges): void {
+  // this.getCurrentWeather(changes.currentZipCode.currentValue);
+  // }
 
+  getCurrentWeather(zipCode: string) {
+    this.weatherService.getWeather(zipCode).subscribe((data) => {
+      this.data = data;
+    });
+  }
 }

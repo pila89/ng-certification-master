@@ -4,9 +4,20 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class ZipCodeService {
-  constructor() {}
+  private zipCodes: Array<string> = [];
+  constructor() {
+    const data = localStorage.getItem("zipCodes");
+    if (data !== null) {
+      this.zipCodes = data?.split(",");
+    }
+  }
 
-  getAllZipCodes() {}
-  
-  addZipCode() {}
+  getAllZipCodes() {
+    return this.zipCodes;
+  }
+
+  addZipCode(zipCode: string) {
+    this.zipCodes.push(zipCode);
+    localStorage.setItem("zipCodes", this.zipCodes.join(","));
+  }
 }
