@@ -8,7 +8,8 @@ export class ZipCodeService {
   constructor() {
     const data = localStorage.getItem("zipCodes");
     if (data !== null) {
-      this.zipCodes = data?.split(",");
+      // this.zipCodes = data?.split(",");
+      this.zipCodes = JSON.parse(data)
     }
   }
 
@@ -18,6 +19,7 @@ export class ZipCodeService {
 
   addZipCode(zipCode: string) {
     this.zipCodes.push(zipCode);
-    localStorage.setItem("zipCodes", this.zipCodes.join(","));
+    // localStorage.setItem("zipCodes", this.zipCodes.join(","));
+    localStorage.setItem ("zipCodes", JSON.stringify(this.zipCodes));
   }
 }
