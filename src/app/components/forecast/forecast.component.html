@@ -1,26 +1,24 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">5-day forecast for {{data?.city?.name}}</h3>
+            <h3 class="panel-title">5-day forecast for {{data.city.name}}</h3>
         </div>
         <ul class="list-group">
-            <!---->
-            <li *ngFor="let day of data?.list" class="list-group-item">
-                <!-- Monday, Mar 23:  -->
-                {{day?.dt|date:'EEEE, MMMM d hh:mm:ss'}} 
-                {{day?.weather[0].main}}
-                - Min: {{day?.temp?.min}}
-                - Max: {{day?.temp?.max}}
-                <div *ngIf="day?.weather[0].main === 'Clear'">
+            <li *ngFor="let day of data.list" class="list-group-item">
+                {{(day.dt_txt)|date:'EEEE,MMMM d hh:mm:ss'}} 
+                {{day.weather[0].main}}
+                - Min: {{day.main.temp_min}}
+                - Max: {{day.main.temp_max}}
+                <div *ngIf="day?.weather[0].description === 'clear sky'">
                     <img class="icon" src="https://www.angulartraining.com/images/weather/sun.png">
                 </div>
-                <div *ngIf="day?.weather[0].main === 'Clouds'">
+                <div *ngIf="day?.weather[0].description === 'overcast clouds'">
                     <img class="icon" src="https://www.angulartraining.com/images/weather/clouds.png">
                 </div>
-                <div *ngIf="day?.weather[0].main === 'Snow'">
+                <div *ngIf="day?.weather[0].description === 'snow'">
                     <img class="icon" src="https://www.angulartraining.com/images/weather/snow.png">
                 </div>
-                <div *ngIf="day?.weather[0].main === 'Rain'">
+                <div *ngIf="day?.weather[0].description === 'rain'">
                     <img class="icon" src="https://www.angulartraining.com/images/weather/rain.png">
                 </div>
             </li>
